@@ -1,0 +1,16 @@
+'MacroName:FicToJFic
+'MacroDescription:Fic to JFic
+
+
+Sub Main
+
+   Dim CS As Object
+   Set CS = CreateObject("Connex.Client")
+
+   CS.UncontrolAll
+
+   CS.ReplaceTextAll "Fiction","Juvenile Fiction",1
+
+   CS.ControlHeadingsAll
+
+End Sub
