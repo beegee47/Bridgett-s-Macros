@@ -1,0 +1,126 @@
+'MacroName:Launchpads
+'MacroDescription:Launchpads macro checks fixed fields, removes 330, 490, 500, 936, 336, 337, 338, 938 Fields. Adds Fields: 035, 099, 538, 650, 500, 521, 650, 336, 337, 338. 
+
+
+Sub Main
+
+   Dim CS As Object
+   Set CS = CreateObject("Connex.Client")
+   
+   'Check Fixed Fields and change
+   
+    bool = CS.GetFixedField("Form", FormCode$)
+    bool = CS.SetFixedField("Form", "q")
+  
+    bool = CS.GetFixedField("Audn", AudienceCode$)
+    bool = CS.SetFixedField("Audn", "j")
+  
+    bool = CS.GetFixedField("File", FileCode$)
+    bool = CS.SetFixedField("File", "m")
+  
+    
+    
+   'Delete Fields
+    
+     ' Delete 007 fields
+   FieldNum$ = "007"
+      Do
+         Success = CS.DeleteField(FieldNum$, 1)
+      Loop Until Success = FALSE
+    
+    'Delete 500 fields
+   FieldNum$ = "500"
+      Do
+         Success = CS.DeleteField(FieldNum$, 1)
+      Loop Until Success = FALSE
+      
+     'Delete 938 fields
+   FieldNum$ = "938"
+      Do
+         Success = CS.DeleteField(FieldNum$, 1)
+      Loop Until Success = FALSE
+      
+      'Delete 300 fields
+   FieldNum$ = "300"
+      Do
+         Success = CS.DeleteField(FieldNum$, 1)
+      Loop Until Success = FALSE
+      
+      'Delete 490 fields
+   FieldNum$ = "490"
+      Do
+         Success = CS.DeleteField(FieldNum$, 1)
+      Loop Until Success = FALSE
+      
+      'Delete 936 fields
+   FieldNum$ = "936"
+      Do
+         Success = CS.DeleteField(FieldNum$, 1)
+      Loop Until Success = FALSE
+    
+   'Delete 336 fields
+   FieldNum$ = "336"
+      Do
+         Success = CS.DeleteField(FieldNum$, 1)
+      Loop Until Success = FALSE
+      
+      'Delete 337 fields
+   FieldNum$ = "337"
+      Do
+         Success = CS.DeleteField(FieldNum$, 1)
+      Loop Until Success = FALSE
+      
+      'Delete 338 fields
+   FieldNum$ = "338"
+      Do
+         Success = CS.DeleteField(FieldNum$, 1)
+      Loop Until Success = FALSE
+      
+      'Delete 336 fields
+   FieldNum$ = "520"
+      Do
+         Success = CS.DeleteField(FieldNum$, 2)
+      Loop Until Success = FALSE
+      
+      
+    'Delete 538 fields
+   FieldNum$ = "538"
+      Do
+         Success = CS.DeleteField(FieldNum$, 1)
+      Loop Until Success = FALSE
+      
+      'Delete 521 fields
+   FieldNum$ = "521"
+      Do
+         Success = CS.DeleteField(FieldNum$, 1)
+      Loop Until Success = FALSE
+    
+    'Add Fields
+    bool = CS.AddField(1, "007  c" & Chr(223) & "bs" & Chr(223) & "d" & "c" & Chr(223) & "e" & "z" & Chr(223) & "f" & "a")
+    CS.AddFieldLine 1, "650 0Computer games " & Chr(223) & "v" & " Juvenile software."
+    bool = CS.AddField(1, "490 0Launchpad")
+    bool = CS.AddField(2, "538  Computer tablet.")
+    bool = CS.AddField(3, "521 8Ages 3-5.")
+    bool = CS.AddField(4, "521 8Grades pre-K to K.")
+    bool = CS.AddField(5, "300  1 tablet :" & Chr(223) & "b" & "digital ;" & Chr(223) & "c" & "20 x 13 cm +" & Chr(223) & "e" & "1 power cord and 1 adapter.")
+    bool = CS.AddField(6, "336  computer program" & Chr(223) & "b" & "cop" & Chr(223) & "2" & "rdacontent")
+    bool = CS.AddField(7, "336  two-dimensional moving image" & Chr(223) & "b" & "tdi" & Chr(223) & "2" & "rdacontent")
+    bool = CS.AddField(8, "337  computer" & Chr(223) & "b" & "c" & Chr(223) & "2" & "rdamedia")
+    bool = CS.AddField(9, "338  other" & Chr(223) & "b" & "cz" & Chr(223) & "2" & "rdacarrier")
+    
+    
+     
+   ' Add a new 035 field to the record
+   bool = CS.AddField(1, "035  BLANK")
+   
+   
+    'Add a new 099 field to the record
+    bool = CS.AddField(1, "099  J 794.81 " & Chr(223) & "v" & "BLANK")
+    
+    'Reformat the record
+    bool = CS.Reformat
+       
+    MsgBox "Done"
+   
+
+End Sub
