@@ -1,0 +1,15 @@
+'MacroName:JFic_To_Fic
+'MacroDescription:Change Juvenile Ficton to Comic books, strips, etc.
+
+Sub Main
+
+   Dim CS As Object
+   Set CS = CreateObject("Connex.Client")
+
+   CS.UncontrolAll
+
+   CS.ReplaceTextAll "Juvenile fiction","Comic books, strips, etc.",1
+
+   CS.ControlHeadingsAll
+
+End Sub
