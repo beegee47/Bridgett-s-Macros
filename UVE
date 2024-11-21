@@ -1,0 +1,18 @@
+'MacroName:UVE
+'MacroDescription:Update Validate Export
+
+Sub Main
+
+   Dim CS As Object
+   Set CS = CreateObject("Connex.Client")
+
+   CS.UpdateHoldings
+
+   errorsNum = CS.Validate(errorsList)
+
+   CS.Export
+   
+   'Save the record in the online save file
+    bool = CS.SaveOnline
+
+End Sub
