@@ -1,0 +1,615 @@
+
+'MacroName:DropDownMenu
+'MacroDescription:Drop Down
+
+Sub Main()
+
+    Dim CS As Object
+    Set CS = CreateObject("Connex.Client")
+   
+   
+   ' Prompt the user to enter the type of 099
+   Dim userInput As String
+   userInput = InputBox("Enter the type of 099 (e.g., Fic, SF, Y fic, B):", "Select 099 Type")
+   
+   ' Add the new 035 field to the record
+   bool = CS.AddField(1, "035  BLANK")
+   
+   ' Conditional statement based on user input for the 099 field
+   If userInput <> "" Then
+       If userInput = "AdultFicNovel" Then
+           ' Update the fixed fields for "Fic"
+           Dim LitCode$, AudienceCode$
+           
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "f")
+           
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "e")
+           
+           ' Add the 099 field with a pattern for fiction
+           bool = CS.AddField(1, "099  Fic" & Chr(223) & "a AUTHOR")
+       
+       ElseIf userInput = "AdultFicShortStories" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "j") ' Example value for Fic short stories
+
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "e")
+           
+           bool = CS.AddField(1, "099  Fic" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "AdultGraphicFic" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "f")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "e")
+           
+           bool = CS.AddField(1, "099  Graphic Fic" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "AdultGraphicNonfiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "f") ' Example value for SF
+
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "e")
+           
+           
+           bool = CS.AddField(1, "099  Graphic Fic" & Chr(223) & "a AUTHOR")
+           
+           bool = CS.AddField(1, "099  SF" & Chr(223) & "a AUTHOR")
+           
+      
+           
+           
+       ElseIf userInput = "AdultGraphicSF" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "f") ' Example value for SF
+
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "e")
+           
+           bool = CS.AddField(1, "099  Graphic SF" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "AdultNonFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "0")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "e")
+           
+           bool = CS.AddField(1, "099  Dewey" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "SF" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "f") 
+
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "e")
+           
+           bool = CS.AddField(1, "099  SF" & Chr(223) & "a AUTHOR")
+           
+           
+       ElseIf userInput = "X" Then    
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "f")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "e")
+
+           
+           bool = CS.AddField(1, "099  X" & Chr(223) & "a AUTHOR")
+           
+      
+       ElseIf userInput = "LargePrintX" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "f")
+           
+           bool = CS.GetFixedField("LargePrint", LitCode$)
+           bool = CS.SetFixedField("LargePrint", "d")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "e")
+           
+           bool = CS.AddField(1, "099  Large Print X" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "UF" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "f")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "e")
+
+           
+           bool = CS.AddField(1, "099  UF" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "AdultBiography" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bbool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "0")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "e")
+
+           
+           bool = CS.AddField(1, "099  B" & " SUB" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "AdultGraphicBiography" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "0")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "e")
+
+           
+           bool = CS.AddField(1, "099  Graphic B" & "SUB" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "ArtistWork" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "0")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "e")
+           
+           bool = CS.AddField(1, "099  709.2" & "LAST" & Chr(223) & "a First")
+           
+       ElseIf userInput = "TeenFic" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "f")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "d")
+           
+           bool = CS.AddField(1, "099  Y Fic" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "TeenGraphic" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "f")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "d")
+           
+           bool = CS.AddField(1, "099  Graphic Y Fic" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "TeenNonFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "0")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "d")
+           
+           bool = CS.AddField(1, "099  Y" & "Dewey" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "TeenBiography" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "0")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "d")
+           
+           bool = CS.AddField(1, "099  YB" & " SUB" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "EarlyChapter" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "c")
+           
+           bool = CS.AddField(1, "099  Early Chapter" & Chr(223) & "a AUTHOR")
+       
+       ElseIf userInput = "JuvenileFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "c")
+           
+           bool = CS.AddField(1, "099  J" & Chr(223) & "a AUTHOR")
+           
+           
+        ElseIf userInput = "SpanishJuvenileFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "c")
+           
+           bool = CS.AddField(1, "099  SPANISH J" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "JuvenileNonFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "0")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "c")
+           
+           bool = CS.AddField(1, "099  J" & " Dewey" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "SpanishJuvenileNonFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "0")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "c")
+           
+           bool = CS.AddField(1, "099  SPANISH J" & " Dewey" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "JuvenileGraphic" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "c")
+           
+           bool = CS.AddField(1, "099  Graphic J" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "JuvenileBiography" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "0")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "c")
+           
+           bool = CS.AddField(1, "099  JB" & Chr(223) & "a AUTHOR")
+           
+        ElseIf userInput = "SPANISHJuvenileGraphicFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "c")
+           
+           bool = CS.AddField(1, "099  SPANISH Graphic J" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "JuvenileGraphicNonfiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "0")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "c")
+           
+           bool = CS.AddField(1, "099  Graphic J" & " Dewey" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "SpanishPictureFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+          bool = CS.GetFixedField("LitF", LitCode$)
+          bool = CS.SetFixedField("LitF", "1")
+  
+          bool = CS.GetFixedField("Audn", AudienceCode$)
+          bool = CS.SetFixedField("Audn", "b")
+           
+          bool = CS.AddField(1, "099  SPANISH E" & Chr(223) & "a AUTHOR")
+       
+       ElseIf userInput = "PictureFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+          bool = CS.GetFixedField("LitF", LitCode$)
+          bool = CS.SetFixedField("LitF", "1")
+  
+          bool = CS.GetFixedField("Audn", AudienceCode$)
+          bool = CS.SetFixedField("Audn", "b")
+           
+          bool = CS.AddField(1, "099  E" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "PopPictureFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "b")
+           
+           bool = CS.AddField(1, "099  Pop E" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "OversizePictureFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "b")
+           
+           bool = CS.AddField(1, "099  Oversize E" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "SPANISHHOLIDAYPictureFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "b")
+           
+           bool = CS.AddField(1, "099  SPANISH HOLIDAY  E" & Chr(223) & "a AUTHOR")
+           
+            
+       ElseIf userInput = "HOLIDAYPictureFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "b")
+           
+           bool = CS.AddField(1, "099  HOLIDAY E" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "PictureNonFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "0")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "c")
+           
+           bool = CS.AddField(1, "099  J" & "Dewey" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "SPANISHPictureFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "b")
+           
+           bool = CS.AddField(1, "099  SPANISH E" & Chr(223) & "a AUTHOR")
+           
+           
+       ElseIf userInput = "Reader" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "b")
+           
+           bool = CS.AddField(1, "099  Reader " & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "HolidayPopularReader" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "b")
+           
+           bool = CS.AddField(1, "099  name of holiday" & " Reader " & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "PopularReader" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "b")
+           
+           bool = CS.AddField(1, "099  Pop Reader " & Chr(223) & "a CORPORATE NAME" & "Charater name")
+           
+       ElseIf userInput = "ReaderNonFiction" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "0")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "c")
+           
+           bool = CS.AddField(1, "099  J" & "Dewey" & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "Board" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "a")
+           
+           bool = CS.AddField(1, "099  Board " & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "OversizeBoard" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1") ' Example value for SF
+
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "a")
+           
+           bool = CS.AddField(1, "099  Oversize Board " & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "HolidayBoard" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+            bool = CS.GetFixedField("LitF", LitCode$)
+            bool = CS.SetFixedField("LitF", "1")
+  
+            bool = CS.GetFixedField("Audn", AudienceCode$)
+            bool = CS.SetFixedField("Audn", "a")
+           
+            bool = CS.AddField(1, "099  HOLIDAY Board " & Chr(223) & "a AUTHOR")
+           
+       ElseIf userInput = "SPANISHBoard" Then
+           ' Add other conditions for SF, Y fic, B, etc.
+           ' Update fixed fields and add 099 as needed for each case
+           ' Example:
+           
+           bool = CS.GetFixedField("LitF", LitCode$)
+           bool = CS.SetFixedField("LitF", "1")
+  
+           bool = CS.GetFixedField("Audn", AudienceCode$)
+           bool = CS.SetFixedField("Audn", "a")
+           
+           bool = CS.AddField(1, "099  SPANISH Board " & Chr(223) & "a AUTHOR")
+                  
+       Else
+           ' Handle other cases or default behavior
+           bool = CS.AddField(1, "099  " & userInput)
+       End If
+   Else
+       MsgBox "No 099 type entered. 099 field will not be added.", vbExclamation
+   End If
+
+   ' Delete 938 fields
+   FieldNum$ = "938"
+   Do
+       Success = CS.DeleteField(FieldNum$, 1)
+   Loop Until Success = FALSE
+   
+   ' Delete 776 fields
+   FieldNum$ = "776"
+   Do
+       Success = CS.DeleteField(FieldNum$, 1)
+   Loop Until Success = FALSE
+   
+   ' Delete 029 fields
+   FieldNum$ = "029"
+   Do
+       Success = CS.DeleteField(FieldNum$, 1)
+   Loop Until Success = FALSE
+   
+    ' Delete 072 fields
+   FieldNum$ = "072"
+   Do
+       Success = CS.DeleteField(FieldNum$, 1)
+   Loop Until Success = FALSE
+
+   ' Delete 037 fields
+   FieldNum$ = "037"
+   Do
+       Success = CS.DeleteField(FieldNum$, 1)
+   Loop Until Success = FALSE
+   
+   ' Delete 055 fields
+   FieldNum$ = "055"
+   Do
+       Success = CS.DeleteField(FieldNum$, 1)
+   Loop Until Success = FALSE
+
+   ' Delete 263 fields
+   FieldNum$ = "263"
+   Do
+       Success = CS.DeleteField(FieldNum$, 1)
+   Loop Until Success = FALSE
+   
+   ' Delete 070 fields
+   FieldNum$ = "070"
+   Do
+       Success = CS.DeleteField(FieldNum$, 1)
+   Loop Until Success = FALSE
+
+   ' Delete 029 fields
+   FieldNum$ = "029"
+   Do
+       Success = CS.DeleteField(FieldNum$, 1)
+   Loop Until Success = FALSE
+
+   ' Run the 6XX macro
+   BOOL = CS.RunMacro("Bridgett!6XX")
+  
+   ' Reformat the record
+   bool = CS.Reformat
+   
+   ' Control all headings in the record
+   bool = CS.ControlHeadingsAll
+
+End Sub
