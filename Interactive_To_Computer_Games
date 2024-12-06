@@ -1,0 +1,14 @@
+'MacroName:InteractiveToComputerGames
+'MacroDescription:Launchpad_InteractiveToComGames
+
+Sub Main
+
+   Dim CS As Object
+   Set CS = CreateObject("Connex.Client")
+   
+   CS.UncontrolAll
+
+   CS.ReplaceTextAll "Interactive multimedia","Computer Games",1
+
+
+End Sub
