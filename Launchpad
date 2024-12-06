@@ -27,6 +27,12 @@ Sub Main
       Do
          Success = CS.DeleteField(FieldNum$, 1)
       Loop Until Success = FALSE
+      
+      ' Delete 029 fields
+   FieldNum$ = "029"
+      Do
+         Success = CS.DeleteField(FieldNum$, 1)
+      Loop Until Success = FALSE
     
     'Delete 500 fields
    FieldNum$ = "500"
@@ -98,10 +104,11 @@ Sub Main
     'Add Fields
     bool = CS.AddField(1, "007  c" & Chr(223) & "bs" & Chr(223) & "d" & "c" & Chr(223) & "e" & "z" & Chr(223) & "f" & "a")
     CS.AddFieldLine 1, "650 0Computer games " & Chr(223) & "v" & " Juvenile software."
-    bool = CS.AddField(1, "490 0Launchpad")
+    bool = CS.AddField(1, "4900 Launchpad")
+    bool = CS.AddField(3, "500  Issued on Playaway Launchpad, a pre-loaded tablet; device does not have internet connectivity.")
     bool = CS.AddField(2, "538  Computer tablet.")
-    bool = CS.AddField(3, "521 8Ages 3-5.")
-    bool = CS.AddField(4, "521 8Grades pre-K to K.")
+    bool = CS.AddField(3, "5218 Ages XXX.")
+    bool = CS.AddField(4, "5218 Grades XXX.")
     bool = CS.AddField(5, "300  1 tablet :" & Chr(223) & "b" & "digital ;" & Chr(223) & "c" & "20 x 13 cm +" & Chr(223) & "e" & "1 power cord and 1 adapter.")
     bool = CS.AddField(6, "336  computer program" & Chr(223) & "b" & "cop" & Chr(223) & "2" & "rdacontent")
     bool = CS.AddField(7, "336  two-dimensional moving image" & Chr(223) & "b" & "tdi" & Chr(223) & "2" & "rdacontent")
@@ -116,6 +123,9 @@ Sub Main
    
     'Add a new 099 field to the record
     bool = CS.AddField(1, "099  J 794.81 " & Chr(223) & "v" & "BLANK")
+    
+    ' Run the 6XX macro
+    BOOL = CS.RunMacro("Bridgett!6XX")
     
     'Reformat the record
     bool = CS.Reformat
