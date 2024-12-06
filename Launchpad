@@ -122,7 +122,7 @@ Sub Main
    
    
     'Add a new 099 field to the record
-    bool = CS.AddField(1, "099  J 794.81 " & Chr(223) & "v" & "BLANK")
+    bool = CS.AddField(1, "099  J 794.81 " & Chr(223) & "a" & "BLANK")
     
     ' Run the 6XX macro
     BOOL = CS.RunMacro("Bridgett!6XX")
